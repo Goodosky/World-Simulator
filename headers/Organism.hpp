@@ -20,9 +20,10 @@ class Organism {
     virtual void action() = 0;
     virtual void collision(Organism* attacker) = 0;
     virtual void draw() = 0;
-    // virtual void move() = 0;
 
-    // Getters and setters
+    virtual void reproduce();
+    virtual void fight(Organism* attacker);
+
     int getPower() const;
     int getInitiative() const;
     string getName() const;

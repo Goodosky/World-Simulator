@@ -4,6 +4,34 @@
 
 Organism::Organism(int x, int y, int power, int initiative, string name, World& worldRef) : x(x), y(y), power(power), initiative(initiative), age(0), name(name), worldRef(worldRef) {}
 
+void Organism::reproduce() {
+    //  Draw position of new organism
+    int new_x = x;
+    int new_y = y;
+    worldRef.getRandomNeighborPosition(new_x, new_y, 1, false);
+
+    // Add new organism to the world.
+    if (x != new_x || y != new_y) {
+        worldRef.addOrganism(name, new_x, new_y);
+        cout << "💞 " << name << " has reproduced. Added " << name << " at (" << new_x << ", " << new_y << ")" << endl;
+    } else {
+        cout << "💔 " << name << " tried to reproduce, but there was no space around" << endl;
+    }
+}
+
+void Organism::fight(Organism* attacker) {
+    if (attacker->getPower() >= power) {
+        // Attacker kills defender
+        cout << "💀 " << attacker->getName() << "(attacker) ate " << name << " at (" << x << ", " << y << ")" << endl;
+        worldRef.removeOrganism(this);
+        worldRef.moveOrganism(attacker, x, y);
+    } else {
+        // Defender kills attacker
+        cout << "💀 " << name << " (defender) ate " << attacker->getName() << " at (" << x << ", " << y << ")" << endl;
+        worldRef.removeOrganism(attacker);
+    }
+}
+
 int Organism::getPower() const {
     return power;
 }

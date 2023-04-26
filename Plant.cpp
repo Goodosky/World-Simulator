@@ -5,20 +5,22 @@
 Plant::Plant(string name, int power, int x, int y, World& worldRef) : Organism(x, y, power, 0, name, worldRef) {}
 
 void Plant::action() {
-    reproduce();
+    int chance = rand() % 100;
+    if (chance < 10) {
+        // 10% chance to reproduce
+        reproduce();
+    }
 };
 
-void Plant::reproduce() {
-    //  Draw position of new organism
-    int new_x = x;
-    int new_y = y;
-    worldRef.getRandomNeighborPosition(new_x, new_y, 1, false);
-
-    // Add new organism to the world.
-    if (x != new_x || y != new_y) {
-        worldRef.addOrganism(name, new_x, new_y);
-        cout << "💚 " << name << " has reproduced. Added " << name << " at (" << new_x << ", " << new_y << ")" << endl;
+void Plant::collision(Organism* attacker) {
+    if (attacker->getPower() >= power) {
+        // Attacker kills defender
+        cout << "💀 " << attacker->getName() << "(attacker) ate " << name << " at (" << x << ", " << y << ")" << endl;
+        worldRef.removeOrganism(this);
+        worldRef.moveOrganism(attacker, x, y);
     } else {
-        cout << "💔 " << name << " tried to reproduce, but there was no space around" << endl;
+        // Defender kills attacker
+        cout << "💀 " << name << " (defender) ate " << attacker->getName() << " at (" << x << ", " << y << ")" << endl;
+        worldRef.removeOrganism(attacker);
     }
 }

@@ -16,6 +16,4 @@ class Animal : public Organism {
     void action() override;
 
     virtual void move(int new_x, int new_y);
-    virtual void reproduce(Organism* attacker);
-    virtual void fight(Organism* attacker);
 };
