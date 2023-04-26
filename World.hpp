@@ -5,6 +5,7 @@
 
 #include "Organism.hpp"
 #include "OrganismsFactory.hpp"
+#include "animals/Fox.hpp"
 #include "animals/Sheep.hpp"
 #include "animals/Wolf.hpp"
 

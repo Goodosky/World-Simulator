@@ -5,8 +5,6 @@
 Animal::Animal(string name, int power, int initiative, int x, int y, World& worldRef) : Organism(x, y, power, initiative, name, worldRef) {}
 
 void Animal::collision(Organism* attacker) {
-    cout << "!!! " << name << "( " << x << ", " << y << ") collides with " << attacker->getName() << " (" << attacker->getX() << ", " << attacker->getY() << ")" << endl;
-
     if (attacker->getName() == name) {
         // if collision is with the same species, try to reproduce
         reproduce(attacker);
@@ -16,8 +14,6 @@ void Animal::collision(Organism* attacker) {
 };
 
 void Animal::action() {
-    cout << "Do action: " << name << " (" << x << ", " << y << ")\n";
-
     //  Draw a move direction
     int new_x = x;
     int new_y = y;
@@ -26,10 +22,14 @@ void Animal::action() {
     if (worldRef.getOrganism(new_x, new_y) != nullptr) {
         worldRef.getOrganism(new_x, new_y)->collision(this);
     } else {
-        cout << "🐾 " << name << " moves from (" << x << ", " << y << ") to (" << new_x << ", " << new_y << ")" << endl;
-        worldRef.moveOrganism(this, new_x, new_y);
+        move(new_x, new_y);
     }
 };
+
+void Animal::move(int new_x, int new_y) {
+    cout << "🐾 " << name << " moves from (" << x << ", " << y << ") to (" << new_x << ", " << new_y << ")" << endl;
+    worldRef.moveOrganism(this, new_x, new_y);
+}
 
 void Animal::reproduce(Organism* attacker) {
     // Animal can reproduce only if it is older than 6
