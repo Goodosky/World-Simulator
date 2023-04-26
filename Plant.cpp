@@ -6,8 +6,7 @@ Plant::Plant(string name, int power, int x, int y, World& worldRef) : Organism(x
 
 void Plant::action() {
     int chance = rand() % 100;
-    if (chance < 10) {
-        // 10% chance to reproduce
+    if (chance < PLANT_REPRODUCTION_CHANCE) {
         reproduce();
     }
 };
