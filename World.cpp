@@ -4,9 +4,10 @@ World::World() {
     numberOfTurns = 0;
 
     organismsFactory.registerOrganism<Wolf>("Wolf");
-    organismsFactory.registerOrganism<Sheep>("Sheep");
-    organismsFactory.registerOrganism<Fox>("Fox");
-    organismsFactory.registerOrganism<Turtle>("Turtle");
+    // organismsFactory.registerOrganism<Sheep>("Sheep");
+    // organismsFactory.registerOrganism<Fox>("Fox");
+    // organismsFactory.registerOrganism<Turtle>("Turtle");
+    organismsFactory.registerOrganism<Antelope>("Antelope");
 
     cout << "Give world width: ";
     cin >> worldWidth;
@@ -108,25 +109,27 @@ void World::removeOrganism(Organism* organism) {
     organisms.erase(remove(organisms.begin(), organisms.end(), organism), organisms.end());
 }
 
-void World::getRandomNeighborPosition(int& x, int& y, bool can_be_occupied) {
+void World::getRandomNeighborPosition(int& x, int& y, int range, bool can_be_occupied) {
     int direction = rand() % 4;
 
     for (int i = 0; i < 4; i++) {
         int new_x = x;
         int new_y = y;
 
+        int step_length = (rand() % range) + 1;
+
         switch (direction) {
             case 0:
-                new_x--;
+                new_x -= step_length;
                 break;
             case 1:
-                new_x++;
+                new_x += step_length;
                 break;
             case 2:
-                new_y--;
+                new_y -= step_length;
                 break;
             case 3:
-                new_y++;
+                new_y += step_length;
                 break;
         }
 

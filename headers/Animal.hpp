@@ -6,6 +6,9 @@
 using namespace std;
 
 class Animal : public Organism {
+   protected:
+    int range = 1;
+
    public:
     Animal(string name, int power, int initiative, int x, int y, World& worldRef);
 

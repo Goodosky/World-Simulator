@@ -16,12 +16,16 @@ class Turtle : public Animal {
         int chance = rand() % 100;
         if (chance > 75) {
             Animal::action();
+        } else {
+            cout << "🎁 Turtle didn't move\n";
         }
     }
 
     void fight(Organism* attacker) override {
         if (attacker->getPower() >= 5) {
             Animal::fight(attacker);
+        } else {
+            cout << "🎁 Turtle countered the " << attacker->getName() << endl;
         }
     }
 };

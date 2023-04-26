@@ -5,6 +5,7 @@
 
 #include "Organism.hpp"
 #include "OrganismsFactory.hpp"
+#include "animals/Antelope.hpp"
 #include "animals/Fox.hpp"
 #include "animals/Sheep.hpp"
 #include "animals/Turtle.hpp"
@@ -34,7 +35,7 @@ class World {
     void addOrganism(string organism_name, int x, int y);
     void removeOrganism(Organism* organism);
 
-    void getRandomNeighborPosition(int& x, int& y, bool can_be_occupied = true);
+    void getRandomNeighborPosition(int& x, int& y, int range = 1, bool can_be_occupied = true);
 
     int getWidth() const { return worldWidth; };
     int getHeight() const { return worldHeight; };

@@ -17,7 +17,7 @@ void Animal::action() {
     //  Draw a move direction
     int new_x = x;
     int new_y = y;
-    worldRef.getRandomNeighborPosition(new_x, new_y);
+    worldRef.getRandomNeighborPosition(new_x, new_y, range);
 
     if (worldRef.getOrganism(new_x, new_y) != nullptr) {
         worldRef.getOrganism(new_x, new_y)->collision(this);
@@ -38,7 +38,7 @@ void Animal::reproduce(Organism* attacker) {
     //  Draw position of new organism
     int new_x = x;
     int new_y = y;
-    worldRef.getRandomNeighborPosition(new_x, new_y, false);
+    worldRef.getRandomNeighborPosition(new_x, new_y, 1, false);
 
     // Add new organism to the world.
     if (x != new_x || y != new_y) {
