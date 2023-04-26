@@ -7,6 +7,7 @@
 #include "OrganismsFactory.hpp"
 #include "animals/Fox.hpp"
 #include "animals/Sheep.hpp"
+#include "animals/Turtle.hpp"
 #include "animals/Wolf.hpp"
 
 #define INITIAL_WORLD_FILLING 0.1

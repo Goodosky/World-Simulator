@@ -5,7 +5,8 @@ World::World() {
 
     organismsFactory.registerOrganism<Wolf>("Wolf");
     organismsFactory.registerOrganism<Sheep>("Sheep");
-    organismsFactory.registerOrganism<Sheep>("Fox");
+    organismsFactory.registerOrganism<Fox>("Fox");
+    organismsFactory.registerOrganism<Turtle>("Turtle");
 
     cout << "Give world width: ";
     cin >> worldWidth;
