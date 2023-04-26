@@ -12,4 +12,6 @@ class Animal : public Organism {
 
     void collision(Organism* attacker) override;
     void action() override;
+    void reproduce(Organism* attacker);
+    void fight(Organism* attacker);
 };

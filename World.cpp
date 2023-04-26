@@ -40,7 +40,7 @@ void World::nextTurn() {
 
     cout << "\n\033[1;33m--- Turn: " << numberOfTurns << "---\033[0m\n";
 
-    // Sort organisms by initiative
+    // Sort organisms by initiative and age
     sort(organisms.begin(), organisms.end(), [](Organism* a, Organism* b) {
         if (a->getInitiative() == b->getInitiative()) {
             return a->getAge() > b->getAge();
@@ -50,7 +50,6 @@ void World::nextTurn() {
     });
 
     cout << "Organisms: \n";
-    // Do action
     for (Organism* organism : organisms) {
         cout << organism->getName() << " (" << organism->getX() << ", " << organism->getY() << ")\n";
     }
@@ -58,10 +57,9 @@ void World::nextTurn() {
     cout << endl;
 
     // Do action
-    for (Organism* organism : organisms) {
-        organism->setAge(organism->getAge() + 1);
-        cout << "Do action: " << organism->getName() << " (" << organism->getX() << ", " << organism->getY() << ")\n";
-        organism->action();
+    for (int i = 0; i < organisms.size(); i++) {
+        organisms[i]->setAge(organisms[i]->getAge() + 1);
+        organisms[i]->action();
     }
 }
 
@@ -107,10 +105,11 @@ void World::removeOrganism(Organism* organism) {
 }
 
 void World::getRandomNeighborPosition(int& x, int& y, bool can_be_occupied) {
-    while (true) {
+    int direction = rand() % 4;
+
+    for (int i = 0; i < 4; i++) {
         int new_x = x;
         int new_y = y;
-        int direction = rand() % 4;
 
         switch (direction) {
             case 0:
@@ -136,6 +135,9 @@ void World::getRandomNeighborPosition(int& x, int& y, bool can_be_occupied) {
             }
         }
 
-        // ...if not, draw direction again
+        // ...if not, try a next direction
+        direction = (direction++) % 4;
     }
+
+    // If (can_be_occupied == false) and there is no free space, the coordinates will not change
 }
