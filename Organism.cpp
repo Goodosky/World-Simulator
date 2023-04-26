@@ -1,6 +1,6 @@
-#include "Organism.hpp"
+#include "headers/Organism.hpp"
 
-#include "World.hpp"
+#include "headers/World.hpp"
 
 Organism::Organism(int x, int y, int power, int initiative, string name, World& worldRef) : x(x), y(y), power(power), initiative(initiative), age(0), name(name), worldRef(worldRef) {}
 

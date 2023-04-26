@@ -1,6 +1,6 @@
-#include "Animal.hpp"
+#include "headers/Animal.hpp"
 
-#include "World.hpp"
+#include "headers/World.hpp"
 
 Animal::Animal(string name, int power, int initiative, int x, int y, World& worldRef) : Organism(x, y, power, initiative, name, worldRef) {}
 

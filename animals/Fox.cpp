@@ -1,6 +1,6 @@
-#include "Fox.hpp"
+#include "../headers/animals/Fox.hpp"
 
-#include "../World.hpp"
+#include "../headers/World.hpp"
 
 Fox::Fox(int x, int y, World& worldRef) : Animal("Fox", 3, 7, x, y, worldRef) {}
 
