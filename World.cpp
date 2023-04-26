@@ -4,10 +4,11 @@ World::World() {
     numberOfTurns = 0;
 
     organismsFactory.registerOrganism<Wolf>("Wolf");
-    // organismsFactory.registerOrganism<Sheep>("Sheep");
-    // organismsFactory.registerOrganism<Fox>("Fox");
-    // organismsFactory.registerOrganism<Turtle>("Turtle");
+    organismsFactory.registerOrganism<Sheep>("Sheep");
+    organismsFactory.registerOrganism<Fox>("Fox");
+    organismsFactory.registerOrganism<Turtle>("Turtle");
     organismsFactory.registerOrganism<Antelope>("Antelope");
+    organismsFactory.registerOrganism<Grass>("Grass");
 
     cout << "Give world width: ";
     cin >> worldWidth;
