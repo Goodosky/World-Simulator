@@ -1,11 +1,10 @@
 #include "World.hpp"
 
-#include "animals/Wolf.hpp"
-
 World::World() {
     numberOfTurns = 0;
 
-    srand(time(nullptr));
+    organismsFactory.registerOrganism<Wolf>("Wolf");
+    organismsFactory.registerOrganism<Sheep>("Sheep");
 
     cout << "Give world width: ";
     cin >> worldWidth;
@@ -17,10 +16,12 @@ World::World() {
     world.resize(worldWidth, vector<Organism*>(worldHeight, nullptr));
 
     // Add random animals to organisms vector
-    organisms.push_back(new Wolf(0, 0, *this));
-    organisms.push_back(new Wolf(0, 0, *this));
+
+    organisms.push_back(organismsFactory.create("Wolf", 0, 0, *this));
+    organisms.push_back(organismsFactory.create("Sheep", 0, 0, *this));
 
     // Asign added animals to the world at random position
+    srand(time(nullptr));
     for (auto& organism : organisms) {
         int x = rand() % worldWidth;
         int y = rand() % worldHeight;
@@ -136,7 +137,7 @@ void World::getRandomNeighborPosition(int& x, int& y, bool can_be_occupied) {
         }
 
         // ...if not, try a next direction
-        direction = (direction++) % 4;
+        direction = (direction + 1) % 4;
     }
 
     // If (can_be_occupied == false) and there is no free space, the coordinates will not change

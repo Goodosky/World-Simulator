@@ -4,6 +4,9 @@
 #include <vector>
 
 #include "Organism.hpp"
+#include "OrganismsFactory.hpp"
+#include "animals/Sheep.hpp"
+#include "animals/Wolf.hpp"
 
 using namespace std;
 
@@ -13,6 +16,8 @@ class World {
     vector<Organism*> organisms;
     int worldWidth, worldHeight;
     int numberOfTurns;
+
+    OrganismsFactory organismsFactory;
 
    public:
     World();

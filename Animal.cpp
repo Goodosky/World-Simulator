@@ -5,10 +5,11 @@
 Animal::Animal(string name, int power, int initiative, int x, int y, World& worldRef) : Organism(x, y, power, initiative, name, worldRef) {}
 
 void Animal::collision(Organism* attacker) {
-    // if collision is with the same species, create a new organism
-    if (attacker->getName() == name) {
-        reproduce(attacker);
+    cout << "!!! " << name << "( " << x << ", " << y << ") collides with " << attacker->getName() << " (" << attacker->getX() << ", " << attacker->getY() << ")" << endl;
 
+    if (attacker->getName() == name) {
+        // if collision is with the same species, try to reproduce
+        reproduce(attacker);
     } else {
         fight(attacker);
     }
@@ -42,7 +43,7 @@ void Animal::reproduce(Organism* attacker) {
     // Add new organism to the world.
     if (x != new_x || y != new_y) {
         worldRef.addOrganism(name, new_x, new_y);
-        cout << "💛 " << name << " has reproduced. Added " << name << " at (" << new_x << ", " << new_y << ")" << endl;
+        cout << "💞 " << name << " has reproduced. Added " << name << " at (" << new_x << ", " << new_y << ")" << endl;
     } else {
         cout << "💔 " << name << " tried to reproduce, but there was no space around" << endl;
     }
@@ -56,8 +57,7 @@ void Animal::fight(Organism* attacker) {
         worldRef.moveOrganism(attacker, x, y);
     } else {
         // Defender kills attacker
-        cout << "💀 " << name << "(defender) ate " << attacker->getName() << " at (" << x << ", " << y << ")" << endl;
+        cout << "💀 " << name << " (defender) ate " << attacker->getName() << " at (" << x << ", " << y << ")" << endl;
         worldRef.removeOrganism(attacker);
-        worldRef.moveOrganism(this, x, y);
     }
 }
