@@ -8,6 +8,8 @@
 #include "animals/Sheep.hpp"
 #include "animals/Wolf.hpp"
 
+#define INITIAL_WORLD_FILLING 0.1
+
 using namespace std;
 
 class World {

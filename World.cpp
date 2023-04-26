@@ -15,14 +15,16 @@ World::World() {
     // Create two dimensional vector of pointers and fill it with nullptr
     world.resize(worldWidth, vector<Organism*>(worldHeight, nullptr));
 
-    // Add random animals to organisms vector
-
-    organisms.push_back(organismsFactory.create("Wolf", 0, 0, *this));
-    organisms.push_back(organismsFactory.create("Sheep", 0, 0, *this));
-
-    // Asign added animals to the world at random position
+    // Add random Organisms to organisms vector
     srand(time(nullptr));
-    for (auto& organism : organisms) {
+    int number_of_organisms = worldHeight * worldWidth * INITIAL_WORLD_FILLING;
+
+    for (int i = 0; i < number_of_organisms; i++) {
+        // Draw organism name
+        int random_index = rand() % organismsFactory.availableOrganisms.size();
+        string organizm_name = organismsFactory.availableOrganisms[random_index];
+
+        //  Draw position
         int x = rand() % worldWidth;
         int y = rand() % worldHeight;
 
@@ -31,9 +33,11 @@ World::World() {
             y = rand() % worldHeight;
         }
 
-        organism->setPosition(x, y);
-        world[x][y] = organism;
+        addOrganism(organizm_name, x, y);
     }
+
+    // organisms.push_back(organismsFactory.create("Wolf", 0, 0, *this));
+    // organisms.push_back(organismsFactory.create("Sheep", 0, 0, *this));
 }
 
 void World::nextTurn() {
@@ -87,10 +91,7 @@ Organism* World::getOrganism(int x, int y) {
 }
 
 void World::addOrganism(string organism_name, int x, int y) {
-    if (organism_name == "Wolf") {
-        organisms.push_back(new Wolf(x, y, *this));
-    }
-
+    organisms.push_back(organismsFactory.create(organism_name, x, y, *this));
     world[x][y] = organisms.back();
 }
 
