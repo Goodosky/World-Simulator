@@ -21,4 +21,6 @@ void Fox::action() {
     } else if (power >= organism->getPower()) {
         organism->collision(this);
     }
+
+    cout << "🎁 Fox gave up attacking the stronger one";
 };
