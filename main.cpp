@@ -17,8 +17,6 @@ int main() {
         cout << "Choose option: " << endl;
         cout << "q - quit" << endl;
         cout << "n - next turn" << endl;
-        cout << "s - save game" << endl;
-        cout << "l - load game" << endl;
         cout << "wasd - control human" << endl;
 
         if (human->getSpecialAbilityCooldown() == 0)
