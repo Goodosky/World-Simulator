@@ -12,7 +12,6 @@ void Nightshade::collision(Organism* attacker) {
     // Attacker kills Nightshade
     cout << "💀 " << attacker->getName() << "(attacker) ate " << name << " at (" << x << ", " << y << ")" << endl;
     worldRef.removeOrganism(this);
-    worldRef.moveOrganism(attacker, x, y);
 
     // but attacker also dies
     cout << "🎁 " << attacker->getName() << " ate Nightshade and died" << endl;

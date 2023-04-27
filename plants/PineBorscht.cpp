@@ -31,7 +31,6 @@ void PineBorscht::collision(Organism* attacker) {
     // Attacker kills PineBorscht
     cout << "💀 " << attacker->getName() << "(attacker) ate " << name << " at (" << x << ", " << y << ")" << endl;
     worldRef.removeOrganism(this);
-    worldRef.moveOrganism(attacker, x, y);
 
     // but attacker also dies
     cout << "🎁 " << attacker->getName() << " ate PineBorscht and died" << endl;
