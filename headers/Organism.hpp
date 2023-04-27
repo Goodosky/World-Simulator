@@ -35,4 +35,5 @@ class Organism {
     void setY(int y);
     void setAge(int age);
     void setPosition(int x, int y);
+    void setPower(int power);
 };

@@ -72,3 +72,7 @@ void Organism::setPosition(int x, int y) {
     this->x = x;
     this->y = y;
 }
+
+void Organism::setPower(int power) {
+    this->power = power;
+}
