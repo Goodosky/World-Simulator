@@ -13,6 +13,8 @@
 #include "plants/Dandelion.hpp"
 #include "plants/Grass.hpp"
 #include "plants/Guarana.hpp"
+#include "plants/Nightshade.hpp"
+#include "plants/PineBorscht.hpp"
 
 #define INITIAL_WORLD_FILLING 0.1    // 0-1
 #define PLANT_REPRODUCTION_CHANCE 2  // 0-100

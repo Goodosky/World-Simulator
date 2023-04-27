@@ -11,6 +11,8 @@ World::World() {
     organismsFactory.registerOrganism<Grass>("Grass");
     organismsFactory.registerOrganism<Dandelion>("Dandelion");
     organismsFactory.registerOrganism<Guarana>("Guarana");
+    organismsFactory.registerOrganism<Nightshade>("Nightshade");
+    organismsFactory.registerOrganism<PineBorscht>("PineBorscht");
 
     cout << "Give world width: ";
     cin >> worldWidth;
@@ -41,9 +43,6 @@ World::World() {
 
         addOrganism(organizm_name, x, y);
     }
-
-    // organisms.push_back(organismsFactory.create("Wolf", 0, 0, *this));
-    // organisms.push_back(organismsFactory.create("Sheep", 0, 0, *this));
 }
 
 void World::nextTurn() {
@@ -59,13 +58,6 @@ void World::nextTurn() {
             return a->getInitiative() > b->getInitiative();
         }
     });
-
-    cout << "Organisms: \n";
-    for (Organism* organism : organisms) {
-        cout << organism->getName() << " (" << organism->getX() << ", " << organism->getY() << ")\n";
-    }
-
-    cout << endl;
 
     // Do action
     for (int i = 0; i < organisms.size(); i++) {
