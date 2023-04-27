@@ -22,5 +22,5 @@ void Fox::action() {
         organism->collision(this);
     }
 
-    cout << "🎁 Fox gave up attacking the stronger one";
+    cout << "🎁 Fox gave up attacking the stronger one" << endl;
 };
