@@ -48,6 +48,8 @@ World::World() {
 
         addOrganism(organizm_name, x, y);
     }
+
+    updateOrganismsVector();
 }
 
 void World::nextTurn() {
@@ -55,20 +57,13 @@ void World::nextTurn() {
 
     cout << "\n\033[1;33m--- Turn: " << numberOfTurns << "---\033[0m\n";
 
-    // Sort organisms by initiative and age
-    sort(organisms.begin(), organisms.end(), [](Organism* a, Organism* b) {
-        if (a->getInitiative() == b->getInitiative()) {
-            return a->getAge() > b->getAge();
-        } else {
-            return a->getInitiative() > b->getInitiative();
-        }
-    });
-
     // Do action
     for (int i = 0; i < organisms.size(); i++) {
         organisms[i]->setAge(organisms[i]->getAge() + 1);
-        organisms[i]->action();
+        if (organisms[i]->getIsAlive()) organisms[i]->action();
     }
+
+    updateOrganismsVector();
 }
 
 void World::drawWorld() {
@@ -94,8 +89,8 @@ Organism* World::getOrganism(int x, int y) {
 }
 
 void World::addOrganism(string organism_name, int x, int y) {
-    organisms.push_back(organismsFactory.create(organism_name, x, y, *this));
-    world[x][y] = organisms.back();
+    world[x][y] = organismsFactory.create(organism_name, x, y, *this);
+    organismsToAdd.push_back(world[x][y]);
 }
 
 void World::moveOrganism(Organism* organism, int x, int y) {
@@ -106,7 +101,35 @@ void World::moveOrganism(Organism* organism, int x, int y) {
 
 void World::removeOrganism(Organism* organism) {
     world[organism->getX()][organism->getY()] = nullptr;
-    organisms.erase(remove(organisms.begin(), organisms.end(), organism), organisms.end());
+    organism->setIsAlive(false);
+    organismsToRemove.push_back(organism);
+}
+
+void World::updateOrganismsVector() {
+    // Remove dead organisms
+    for (Organism* organism : organismsToRemove) {
+        organisms.erase(remove(organisms.begin(), organisms.end(), organism), organisms.end());
+        delete organism;
+    }
+
+    // Add new organisms
+    for (Organism* organism : organismsToAdd) {
+        organisms.push_back(organism);
+    }
+
+    if (organismsToAdd.size() > 0 || organismsToRemove.size() > 0) {
+        // Sort organisms by initiative and age
+        sort(organisms.begin(), organisms.end(), [](Organism* a, Organism* b) {
+            if (a->getInitiative() == b->getInitiative()) {
+                return a->getAge() > b->getAge();
+            } else {
+                return a->getInitiative() > b->getInitiative();
+            }
+        });
+    }
+
+    organismsToRemove.clear();
+    organismsToAdd.clear();
 }
 
 void World::getRandomNeighborPosition(int& x, int& y, int range, bool can_be_occupied) {

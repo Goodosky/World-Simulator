@@ -26,6 +26,9 @@ class World {
    private:
     vector<vector<Organism*> > world;
     vector<Organism*> organisms;
+    vector<Organism*> organismsToRemove;
+    vector<Organism*> organismsToAdd;
+
     int worldWidth, worldHeight;
     int numberOfTurns;
 
@@ -43,6 +46,7 @@ class World {
     void moveOrganism(Organism* organism, int x, int y);
     void addOrganism(string organism_name, int x, int y);
     void removeOrganism(Organism* organism);
+    void updateOrganismsVector();
 
     void getRandomNeighborPosition(int& x, int& y, int range = 1, bool can_be_occupied = true);
 

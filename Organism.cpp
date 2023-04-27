@@ -56,6 +56,10 @@ int Organism::getY() const {
     return y;
 }
 
+bool Organism::getIsAlive() const {
+    return isAlive;
+}
+
 void Organism::setX(int x) {
     this->x = x;
 }
@@ -75,4 +79,8 @@ void Organism::setPosition(int x, int y) {
 
 void Organism::setPower(int power) {
     this->power = power;
+}
+
+void Organism::setIsAlive(bool isAlive) {
+    this->isAlive = isAlive;
 }
