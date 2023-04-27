@@ -23,6 +23,11 @@ World::World() {
     // Create two dimensional vector of pointers and fill it with nullptr
     world.resize(worldWidth, vector<Organism*>(worldHeight, nullptr));
 
+    // Add human to the world
+    human = new Human(worldWidth / 2, worldHeight / 2, *this);
+    organisms.push_back(human);
+    world[worldWidth / 2][worldHeight / 2] = organisms.back();
+
     // Add random Organisms to organisms vector
     srand(time(nullptr));
     int number_of_organisms = worldHeight * worldWidth * INITIAL_WORLD_FILLING;
@@ -82,7 +87,7 @@ void World::drawWorld() {
     }
 
     cout << endl;
-};
+}
 
 Organism* World::getOrganism(int x, int y) {
     return world[x][y];
@@ -142,4 +147,16 @@ void World::getRandomNeighborPosition(int& x, int& y, int range, bool can_be_occ
     }
 
     // If (can_be_occupied == false) and there is no free space, the coordinates will not change
+}
+
+int World::getWidth() const {
+    return worldWidth;
+}
+
+int World::getHeight() const {
+    return worldHeight;
+}
+
+Human* World::getHuman() {
+    return human;
 }

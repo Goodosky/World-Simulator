@@ -7,6 +7,7 @@
 #include "OrganismsFactory.hpp"
 #include "animals/Antelope.hpp"
 #include "animals/Fox.hpp"
+#include "animals/Human.hpp"
 #include "animals/Sheep.hpp"
 #include "animals/Turtle.hpp"
 #include "animals/Wolf.hpp"
@@ -30,6 +31,8 @@ class World {
 
     OrganismsFactory organismsFactory;
 
+    Human* human;
+
    public:
     World();
 
@@ -43,6 +46,7 @@ class World {
 
     void getRandomNeighborPosition(int& x, int& y, int range = 1, bool can_be_occupied = true);
 
-    int getWidth() const { return worldWidth; };
-    int getHeight() const { return worldHeight; };
+    int getWidth() const;
+    int getHeight() const;
+    Human* getHuman();
 };
